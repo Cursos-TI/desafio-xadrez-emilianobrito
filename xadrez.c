@@ -1,50 +1,56 @@
 #include <stdio.h>
 
 // Desafio de Xadrez - MateCheck
-// Nívelaventureiro
+// Nível mestre
 
-int main() {
-    int i;
-    int casa = 5;
-    //Movimento da Torre (5 casas para a Direita) - Usando FOR 
-    printf("Movimento da Torre (5 casas para a Direita):\n");
-
-    for (i = 1; i <= casa; i++) {
+//Função Recursiva da Torre
+void moverTorre(int casas) {
+    if (casas > 0){
         printf("Direita\n");
+        moverTorre(casas - 1);
     }
-
-    //Movimento do Bispo (5 casas na Diagonal Cima Direita) - Usando WHILE 
-    i = 1;
-    printf("\nMovimento do Bispo (5 casas na Diagonal Cima Direita):\n");
-
-    while (i <= casa) {
-        printf("Cima Direita\n");
-        i++;
-    }
-
-    //Movimento da Rainha (8 casas para a Esquerda) - Usando DO-WHILE 
-    i = 1;
-    casa = 8;
-    printf("\nMovimento da Rainha (8 casas para a Esquerda):\n");
-
-    do {
-        printf("Esquerda\n");
-        i++;
-    } while (i <= casa);
-
-    //Movimento do Cavalo (2 casas para Baixo, 1 para Esquerda) - Usando WHILE e FOR
-    i = 1;
-    int casasBaixo = 2;
-    int casasEsquerda = 1;
-    printf("\nMovimento do Cavalo (2 casas para Baixo, 1 para a Esquerda):\n");
-    while (i == casasEsquerda) {
-        for (int i = 1; i <= casasBaixo; i++) {
-            printf("baixo\n");
-        }
-        printf("Esquerda\n");
-        i++;
-    }
-
-    return 0;
 }
 
+//Função Recursiva da Rainha
+void moverRainha(int casas) {
+    if (casas > 0){
+        printf("Esquerda\n");
+        moverRainha(casas - 1);
+    }
+}
+
+void moverBispo(int casas) {
+    if (casas > 0){
+        for (int i = 1; i > 0; i--) {
+            printf("Cima ");
+            for (int j = 1; j > 0; j--) {
+                printf("Direita\n");
+            }
+        }
+        moverBispo(casas - 1);
+    }
+}
+
+int main() {
+    printf("Movimento da Torre (5 casas para Direita):\n");
+    moverTorre(5);
+
+    printf("\nMovimento da Rainha (8 casas para a Esquerda):\n");
+    moverRainha(8);
+
+    printf("\nMovimento do Bispo (5 casas na Diagonal Cima Direita):\n");
+    moverBispo(5);
+
+    int i = 1;
+    int Cima = 2;
+    int Direita = 1;
+    printf("\nMovimento do Cavalo (2 casas para Cima e 1 casa para a Direita):\n");
+    while (i == Direita && Cima == 2) {
+        for (int i = 1; i <= Cima && Direita == 1; i++) {
+            printf("Cima\n");
+        }
+        printf("Direita\n");
+        i++;
+    }
+    return 0;
+}
